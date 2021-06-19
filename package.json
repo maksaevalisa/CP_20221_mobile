@@ -26,6 +26,7 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.4.0",
     "react-native-scroll-bottom-sheet": "^0.7.0",
+    "react-native-svg": "^12.1.1",
     "react-native-vector-icons": "^8.1.0",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "sync-storage": "^0.4.2"

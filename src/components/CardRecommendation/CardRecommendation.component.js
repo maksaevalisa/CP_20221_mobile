@@ -18,31 +18,32 @@ const Tabs = ({ title, onPress }) => {
 	)
 }
 
-const CardRecommendation = ({ onPress }) => {
+const CardRecommendation = ({ onPress,product,setActions }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.vitaminContainer}>
 
 				<View style={styles.vitaminNameContainer}>
-					<Text style={styles.vitaminNameText}>Zn</Text>
+					<Text style={styles.vitaminNameText}>{product.product.product_charcode}</Text>
 				</View>
 
 				<View style={styles.vitaminTextContainer} >
-					<Text style={styles.vitaminTitle}>Витамины группы В</Text>
-					<Text style={styles.vitaminDescription}>1 таблетка в день</Text>
+					<Text style={styles.vitaminTitle}>{product.product.product_internal_name}</Text>
+					<Text style={styles.vitaminDescription}>{product.product.description_instruction}</Text>
 				</View>
 			</View>
 
 			<View style={styles.tabsContainer}>
-				<Tabs
-					title='Вы едите мало продуктов богатых белком'
-					onPress={onPress} />
-				<Tabs
-					title='Вы едите мало продуктов богатых белком'
-					onPress={onPress} />
-				<Tabs
-					title='Вы едите мало продуктов богатых белком'
-					onPress={onPress} />
+				
+				{product.actions.map((action)=>{
+					
+					return(
+						<Tabs
+						title={action.title}
+						onPress={onPress} />
+					)
+				})}
+			
 			</View>
 
 			<View

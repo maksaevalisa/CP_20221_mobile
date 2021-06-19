@@ -7,7 +7,6 @@ import styles from './RadioButtons.styles';
 
 const RadioButtons = (props) => {
 	const [selected, setSelected] = React.useState(null);
-	const [selectedItem, setSelectedItem] = React.useState(null);
 	const [skip, setSkip] = React.useState(true)
 
 	useEffect(() => {
@@ -21,13 +20,6 @@ const RadioButtons = (props) => {
 		})
 		console.log(props.data)
 	}, [])
-	const onRadioButtonsChange = (e) => {
-		let tempData = [...props.data.answers]
-		tempData.forEach((radio) => {
-			radio.value = 'false';
-		})
-		props.setData({ ...props.data, answers: tempData })
-	}
 
 	useEffect(() => {
 		if (selected !== null && !skip) {

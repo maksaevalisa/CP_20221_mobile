@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity,ScrollView } from 'react-native';
 
 //styles
 import styles from './CardRecommendation.styles';
@@ -9,49 +9,52 @@ import RowRight from 'react-native-vector-icons/AntDesign';
 
 const Tabs = ({ title, onPress }) => {
 	return (
-		<View style={styles.tab}>
+		<TouchableOpacity style={styles.tab} onPress={onPress}>
 			<Text style={styles.tabText}>{title}</Text>
 			<TouchableOpacity style={styles.rowBox} activeOpacity={0.8} onPress={onPress}>
 				<RowRight name="right" size={16} color="#fff" />
 			</TouchableOpacity>
-		</View>
+		</TouchableOpacity>
 	)
 }
 
-const CardRecommendation = ({ onPress }) => {
+const CardRecommendation = ({ onPress,product }) => {
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.vitaminContainer}>
 
 				<View style={styles.vitaminNameContainer}>
-					<Text style={styles.vitaminNameText}>Zn</Text>
+					<Text style={styles.vitaminNameText}>{product.product.product_charcode}</Text>
 				</View>
 
 				<View style={styles.vitaminTextContainer} >
-					<Text style={styles.vitaminTitle}>Витамины группы В</Text>
-					<Text style={styles.vitaminDescription}>1 таблетка в день</Text>
+					<Text style={styles.vitaminTitle}>{product.product.product_internal_name}</Text>
+					<Text style={styles.vitaminDescription}>{product.product.description_instruction}</Text>
 				</View>
 			</View>
 
-			<View style={styles.tabsContainer}>
-				<Tabs
-					title='Вы едите мало продуктов богатых белком'
-					onPress={onPress} />
-				<Tabs
-					title='Вы едите мало продуктов богатых белком'
-					onPress={onPress} />
-				<Tabs
-					title='Вы едите мало продуктов богатых белком'
-					onPress={onPress} />
-			</View>
+			<ScrollView style={styles.tabsContainer}>
+				
+				{product.actions.map((action)=>{
+					
+					return(
+						<Tabs
+						title={action.title}
+						onPress={onPress} />
+					)
+				})}
+			
+			</ScrollView>
 
-			<View
+			<TouchableOpacity
 				style={styles.moreDetails}
-				activeOpacity={0.7}>
+				activeOpacity={0.7}
+				onPress={onPress}>
 
-				<Text style={styles.moreDetailsText}>Подробнее</Text>
+				<Text style={styles.moreDetailsText} >Подробнее</Text>
 				<RowRight name="right" size={12} color="#7F8081" style={{ marginTop: 4 }} />
-			</View>
+			</TouchableOpacity>
 		</View>
 	);
 }

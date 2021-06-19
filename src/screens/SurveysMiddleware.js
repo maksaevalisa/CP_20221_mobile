@@ -2,22 +2,24 @@ import React, { useEffect, useState } from "react";
 import { View, Alert, Text } from 'react-native';
 import { surveyAPI } from "../api/api";
 import SyncStorage from 'sync-storage';
+
 //nav
 import { useNavigation } from '@react-navigation/native';
 
 //screen
 import { StartScreen } from "../screens";
 
-const paramsIdSurvey = 'a8d9ea04-2ef9-4ed9-9ff4-bf2ebe168c8d';
+const paramsIdSurvey = '2e95d454-d62e-474a-bea9-d10675213afe';
 
-const SurveysMiddleware = (props) => {
+const SurveysMiddleware = () => {
 	const navigation = useNavigation();
 
 	const [redirect, setRedirect] = useState(false);
 	const [idSurvey, setIdSurvey] = useState(null)
 
 	useEffect(() => {
-		if (SyncStorage.get('sessionIdSurvey') == null)
+		if (SyncStorage.get('sessionIdSurvey') == null) {
+			console.log("survayMiddleWare")
 			surveyAPI.createSession(paramsIdSurvey)
 				.then(response => {
 					console.log(response.data)
@@ -27,7 +29,7 @@ const SurveysMiddleware = (props) => {
 					setRedirect(true)
 				}).catch(error => {
 				})
-		else {
+		} else {
 			setIdSurvey(SyncStorage.get('sessionIdSurvey'))
 			setRedirect(true)
 		}

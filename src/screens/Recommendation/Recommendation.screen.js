@@ -88,7 +88,6 @@ const Recommendation = () => {
 								</View>
 								)
 							})}
-						
 						</View>
 
 						<Text style={[styles.recommendation, { marginTop: 32 }]}>Витамины</Text>

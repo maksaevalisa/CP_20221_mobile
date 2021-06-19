@@ -34,13 +34,13 @@ export const surveyAPI = {
 	getPreviousPage(idSession, data) {
 		return instance().post(`/surveys/session/${idSession}/return_with_save`, { ...data })
 	},
-	smsRegistrationWithoutData(sessionId){
-        return instanceWithToken().get(`/worksheets/buying/simple_recommendation?session_id=${sessionId}`)
-    },
+	smsRegistrationWithoutData(sessionId) {
+		return instance().get(`/worksheets/buying/simple_recommendation?session_id=${sessionId}`)
+	},
 }
 
 export const appFormsAPI = {
-	getDataRecommendationsDetailed(token){
-        return instance().get(`/recommendations/detailed_recommendation/${token}`)
-    },
+	getDataRecommendationsDetailed(token) {
+		return instance().get(`/recommendations/detailed_recommendation/${token}`)
+	},
 }

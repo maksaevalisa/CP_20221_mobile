@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Alert, Text } from 'react-native';
 import { surveyAPI } from "../api/api";
 import SyncStorage from 'sync-storage';
+
 //nav
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,7 +11,7 @@ import { StartScreen } from "../screens";
 
 const paramsIdSurvey = 'a8d9ea04-2ef9-4ed9-9ff4-bf2ebe168c8d';
 
-const SurveysMiddleware = (props) => {
+const SurveysMiddleware = () => {
 	const navigation = useNavigation();
 
 	const [redirect, setRedirect] = useState(false);

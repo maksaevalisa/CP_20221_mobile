@@ -13,7 +13,8 @@ import styles from './BottomSheetContainer.styles';
 //components
 import CardAnswer from '../../components/CardAnswer/CardAnswer.component';
 
-const BottomSheetContainer = ({ sheetRef }) => {
+const BottomSheetContainer = ({ sheetRef,actions }) => {
+	console.log(actions)
 	return (
 		<RBSheet
 			animationType='slide'
@@ -43,21 +44,14 @@ const BottomSheetContainer = ({ sheetRef }) => {
 				disableScrollViewPanResponder={true}
 				showsVerticalScrollIndicator={false}
 				style={{ paddingHorizontal: 16 }}>
-				<CardAnswer
-					title='Вы часто болеете и это текст в две строки про это'
-					descripton='При нехватке витамина С блюда ломкость сосудов. Вследствие чего синяки могут возникать даже от несильных прикосновени. Так же на дефицит витамина С указывает замедленное восстановление после ушибов, травм, ран' />
-				<CardAnswer
-					title='Вы часто болеете и это текст в две строки про это'
-					descripton='При нехватке витамина С блюда ломкость сосудов. Вследствие чего синяки могут возникать даже от несильных прикосновени. Так же на дефицит витамина С указывает замедленное восстановление после ушибов, травм, ран' />
-				<CardAnswer
-					title='Вы часто болеете и это текст в две строки про это'
-					descripton='При нехватке витамина С блюда ломкость сосудов. Вследствие чего синяки могут возникать даже от несильных прикосновени. Так же на дефицит витамина С указывает замедленное восстановление после ушибов, травм, ран' />
-				<CardAnswer
-					title='Вы часто болеете и это текст в две строки про это'
-					descripton='При нехватке витамина С блюда ломкость сосудов. Вследствие чего синяки могут возникать даже от несильных прикосновени. Так же на дефицит витамина С указывает замедленное восстановление после ушибов, травм, ран' />
-				<CardAnswer
-					title='Вы часто болеете и это текст в две строки про это'
-					descripton='При нехватке витамина С блюда ломкость сосудов. Вследствие чего синяки могут возникать даже от несильных прикосновени. Так же на дефицит витамина С указывает замедленное восстановление после ушибов, травм, ран' />
+				{actions.map((action)=>{
+					return(
+						<CardAnswer
+					title={action.title}
+					descripton={action.text} />
+					)
+				})}
+				
 			</ScrollView>
 		</RBSheet>
 	);

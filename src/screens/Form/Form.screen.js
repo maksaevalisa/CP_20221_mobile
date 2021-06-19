@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import SyncStorage from 'sync-storage';
 
 //api
@@ -18,6 +18,7 @@ import CheckBoxComponent from '../../components/CheckBox/CheckBox.component';
 
 //nav
 import { useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 
 const Form = () => {
 	const navigation = useNavigation();
@@ -29,7 +30,8 @@ const Form = () => {
 	const [redirectRecommendation, setRedirectRecommendation] = useState(false);
 	const [redirectSurvey, setRedirectSurvey] = useState(false);
 	const [tokenRecommendation, setTokenRecommendation] = useState('');
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
+	const [sobralos, setSobralos] = useState(false)
 	// const refBack = useRef(null)
 	//const { idSurvey, otherParam } = route.params;
 
@@ -42,8 +44,9 @@ const Form = () => {
 				SyncStorage.set('redirectRecommendation', 'true')
 				surveyAPI.smsRegistrationWithoutData(idSession)
 					.then(resa => {
+						console.log(resa.data)
 						setTokenRecommendation(resa.data.detailed_recommendation_uuid);
-						//SyncStorage.set('sessionIdSurvey', null)
+						SyncStorage.set('sessionIdSurvey', null)
 						SyncStorage.set('tokenRecommendations', resa.data.detailed_recommendation_uuid)
 
 						setRedirectRecommendation(true)
@@ -52,21 +55,49 @@ const Form = () => {
 		}, 1200)
 
 		if (redirectRecommendation) {
+			//navigation.dispatch(StackActions.popToTop());
 			navigation.navigate('tab/recommendation')
+			//setLoading(false)
+			setSobralos(true)
 		}
-		return (
-			<View style={styles.collectOrder}>
-				<Text>Собираем ваш набор</Text>
-				<View style={styles.loading}>
+		if (!sobralos) {
+			return (
+				<View style={styles.collectOrder}>
+					<Text>Собираем ваш набор</Text>
+					<View style={styles.loading}>
+					</View>
+					<View style={styles.loadText}><Text>Подбираем витамины</Text></View>
 				</View>
-				<View style={styles.loadText}><Text>Подбираем витамины</Text></View>
-			</View>
-		)
+			)
+		} else {
+			return (
+				<View style={styles.collectOrder}>
+					<Text>Вы уже собрали пакет</Text>
+					<View style={styles.loading}>
+					</View>
+					<View style={styles.loadText}><Text>Идите нахуй</Text></View>
+					<TouchableOpacity
+						style={styles.wrapp}
+						activeOpacity={0.8}
+						onPress={() => {
+							console.log()
+							navigation.reset({
+								index: 0,
+								routes: [{ name: 'surveysMiddleware' }]
+							})
+						}}>
+
+						<Text style={styles.text}>Назад</Text>
+					</TouchableOpacity>
+				</View>
+			)
+		}
+
 	}
 
 	useEffect(() => {
 		setFetch(true)
-		console.log(SyncStorage.get('sessionIdSurvey'))
+		console.log("void" + SyncStorage.get('sessionIdSurvey'))
 		if (SyncStorage.get('sessionIdSurvey') != idSession) {
 			setIdSession(SyncStorage.get('sessionIdSurvey'))
 			setRedirectSurvey(true)
@@ -76,7 +107,7 @@ const Form = () => {
 
 	useEffect(() => {
 		setFetch(true)
-		console.log(idSession)
+		console.log("IdSESS" + idSession)
 		surveyAPI.getCurrentPage(idSession)
 			.then(response => {
 				console.log(response.data)

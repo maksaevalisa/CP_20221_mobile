@@ -24,31 +24,34 @@ const Recommendation = () => {
 	const tokenRecommendations = SyncStorage.get('sessionIdSurvey');
 	useEffect(() => {
 		console.log(tokenRecommendations)
-        appFormsAPI.getDataRecommendationsDetailed(tokenRecommendations)
-            .then(response => {
+		appFormsAPI.getDataRecommendationsDetailed(tokenRecommendations)
+			.then(response => {
 				console.log(response.data)
-                let tempBasket = [...response.data.main_positions]
-                // if (localStorage.getItem("basket") && response.data.optional_positions.length !== 0){
-                //     let localBasket = JSON.parse(localStorage.getItem("basket"));
-                //     localBasket.forEach(product => {
-                //         response.data.optional_positions.forEach(recProduct => {
-                //             if(recProduct.product.id === product.id){
-                //                 tempBasket.push(recProduct)
-                //             }
-                //         })
-                //     })
-                // }
-                setRecommendations(response.data.optional_positions)
-                setProducts(response.data.main_positions)
-                setBasket(tempBasket)
-                setLabels(response.data.labels)
-                setName(response.data.user.name)
-                setPhone(response.data.user.phone)
-                setFetchRecommendation(false)
-                setInitialBasket(true)
-            }).catch(error => {
-        })
-    }, [])
+				let tempBasket = [...response.data.main_positions]
+				// if (localStorage.getItem("basket") && response.data.optional_positions.length !== 0){
+				//     let localBasket = JSON.parse(localStorage.getItem("basket"));
+				//     localBasket.forEach(product => {
+				//         response.data.optional_positions.forEach(recProduct => {
+				//             if(recProduct.product.id === product.id){
+				//                 tempBasket.push(recProduct)
+				//             }
+				//         })
+				//     })
+				// }
+				setRecommendations(response.data.optional_positions)
+				setProducts(response.data.main_positions)
+				setBasket(tempBasket)
+				setLabels(response.data.labels)
+				setName(response.data.user.name)
+				setPhone(response.data.user.phone)
+				setFetchRecommendation(false)
+				setInitialBasket(true)
+			}).catch(error => {
+			})
+		return (() => {
+			console.log('navRec')
+		})
+	}, [])
 
 	return (
 		<>

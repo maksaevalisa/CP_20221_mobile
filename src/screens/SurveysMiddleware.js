@@ -18,7 +18,8 @@ const SurveysMiddleware = () => {
 	const [idSurvey, setIdSurvey] = useState(null)
 
 	useEffect(() => {
-		if (SyncStorage.get('sessionIdSurvey') == null)
+		if (SyncStorage.get('sessionIdSurvey') == null) {
+			console.log("survayMiddleWare")
 			surveyAPI.createSession(paramsIdSurvey)
 				.then(response => {
 					console.log(response.data)
@@ -28,7 +29,7 @@ const SurveysMiddleware = () => {
 					setRedirect(true)
 				}).catch(error => {
 				})
-		else {
+		} else {
 			setIdSurvey(SyncStorage.get('sessionIdSurvey'))
 			setRedirect(true)
 		}

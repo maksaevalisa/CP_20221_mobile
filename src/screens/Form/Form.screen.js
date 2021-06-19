@@ -75,7 +75,7 @@ const Form = () => {
 					<Text>Вы уже собрали пакет</Text>
 					<View style={styles.loading}>
 					</View>
-					<View style={styles.loadText}><Text>Идите нахуй</Text></View>
+					<View style={styles.loadText}><Text>Если хотите собрать новый набор</Text></View>
 					<TouchableOpacity
 						style={styles.wrapp}
 						activeOpacity={0.8}

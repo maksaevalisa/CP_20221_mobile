@@ -152,6 +152,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('bafomet.keystore')
+            storePassword 'bafomet'
+            keyAlias 'bafomet'
+            keyPassword 'bafomet'
+        }
     }
     buildTypes {
         debug {

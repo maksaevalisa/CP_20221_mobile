@@ -43,7 +43,7 @@ const Form = () => {
 				surveyAPI.smsRegistrationWithoutData(idSession)
 					.then(resa => {
 						setTokenRecommendation(resa.data.detailed_recommendation_uuid);
-						SyncStorage.set('sessionIdSurvey', null)
+						//SyncStorage.set('sessionIdSurvey', null)
 						SyncStorage.set('tokenRecommendations', resa.data.detailed_recommendation_uuid)
 
 						setRedirectRecommendation(true)
@@ -51,7 +51,9 @@ const Form = () => {
 			}
 		}, 1200)
 
-		if (redirectRecommendation) navigation.navigate('tab/recommendation')
+		if (redirectRecommendation) {
+			navigation.navigate('tab/recommendation')
+		}
 		return (
 			<View style={styles.collectOrder}>
 				<Text>Собираем ваш набор</Text>
@@ -73,22 +75,25 @@ const Form = () => {
 	}, [])
 
 	useEffect(() => {
+		setFetch(true)
 		console.log(idSession)
 		surveyAPI.getCurrentPage(idSession)
 			.then(response => {
 				console.log(response.data)
-				let tempData = { ...response.data.page.attributes }
-				tempData.answers.forEach((answer, index) => {
-					response.data.page.answers.forEach(answerServer => {
-						if (answerServer.key === answer.key) {
-							tempData.answers[index].value = answerServer.value.content
-						}
-						if (answerServer.key == 'phone')
-							setPhone(answerServer.value.content)
+				if (!response.data.is_null) {
+					let tempData = { ...response.data.page.attributes }
+					tempData.answers.forEach((answer, index) => {
+						response.data.page.answers.forEach(answerServer => {
+							if (answerServer.key === answer.key) {
+								tempData.answers[index].value = answerServer.value.content
+							}
+							if (answerServer.key == 'phone')
+								setPhone(answerServer.value.content)
+						})
 					})
-				})
-				console.log(response.data)
-				setData(tempData)
+					setData(tempData)
+				} else
+					setLoading(true)
 				setFetch(false)
 			}).catch(error => {
 				// alert('Такой страницы не существует')

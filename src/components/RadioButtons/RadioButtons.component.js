@@ -14,7 +14,6 @@ const RadioButtons = (props) => {
 		props.data.answers.forEach((item) => {
 			if (item.value == 'true') {
 				setSelected(item.id)
-				setSelectedItem(item)
 				props.setDisabledButton(false)
 			}
 		})
@@ -50,7 +49,6 @@ const RadioButtons = (props) => {
 								style={styles.radioButtonBox}
 								onPress={() => {
 									setSelected(rb.id)
-									setSelectedItem(rb)
 									setSkip(false)
 								}}>
 
@@ -61,7 +59,6 @@ const RadioButtons = (props) => {
 									onPress={() => {
 										setSkip(false)
 										setSelected(rb.id)
-										setSelectedItem(rb)
 									}}
 									status={selected === rb.id ? 'checked' : 'unchecked'}
 								/>

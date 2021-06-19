@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 //screen
 import { StartScreen } from "../screens";
 
-const paramsIdSurvey = 'a8d9ea04-2ef9-4ed9-9ff4-bf2ebe168c8d';
+const paramsIdSurvey = '2e95d454-d62e-474a-bea9-d10675213afe';
 
 const SurveysMiddleware = () => {
 	const navigation = useNavigation();

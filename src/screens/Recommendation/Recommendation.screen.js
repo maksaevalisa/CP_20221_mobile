@@ -33,7 +33,7 @@ const Recommendation = () => {
     const [UUID, setUUID] = useState('');
 	const sheetRef = React.useRef();
 	const [actions, setActions] = useState([]);
-	SyncStorage.set('tokenRecommendations','1619b0d3-e645-4477-8590-779cdea640b0')
+	SyncStorage.set('tokenRecommendations','a8ae3faa-22c0-4d1f-bb1e-2cc11c895492')
 	const tokenRecommendations = SyncStorage.get('tokenRecommendations');
 	useEffect(() => {
 		console.log(tokenRecommendations)

@@ -16,7 +16,7 @@ const StackNavigation = () => (
 
 		<Stack.Screen
 			name='surveysMiddleware'
-			component={SurveysMiddleware}
+			component={(props) => <SurveysMiddleware {...props} />}
 			options={{
 				title: 'Анкета',
 				headerTitleAlign: 'center',
@@ -24,7 +24,7 @@ const StackNavigation = () => (
 
 		<Stack.Screen
 			name='form'
-			component={Form}
+			component={(props) => <Form {...props} />}
 			options={{
 				//headerTransparent: true,
 				title: 'Анкета',

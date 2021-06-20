@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	vitaminNameText: {
-		fontSize: 24,
+		fontSize: 40,
 		color: '#1B1C1E',
-		//fontFamily: 'Graphik-Bold',
+		fontFamily: 'Graphik-Medium',
 		lineHeight: 56,
 	},
 	vitaminTextContainer: {
@@ -72,14 +72,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	moreDetails: {
-		//width: '100%',
 		height: 44,
 		alignItems: 'center',
 		borderTopColor: '#E3E3E3',
 		borderTopWidth: 1,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		//backgroundColor: 'red'
 	},
 	moreDetailsText: {
 		fontSize: 16,

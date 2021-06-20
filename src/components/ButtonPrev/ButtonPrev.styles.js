@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	wrapp: {
 		backgroundColor: '#F2F5FF',
-		width: 112,
+		width: '35%',
 		height: 48,
 		alignItems: 'center',
 		justifyContent: 'center',

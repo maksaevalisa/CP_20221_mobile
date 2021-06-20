@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
 		marginBottom: 16
 	},
 	CardAnswerTitle: {
-		width: '84%',
 		fontSize: 16,
 		color: '#1B1C1E',
 		fontFamily: 'Graphik-Medium',
@@ -18,7 +17,6 @@ const styles = StyleSheet.create({
 		marginBottom: 8
 	},
 	CardAnswerDescription: {
-		width: '91%',
 		fontSize: 14,
 		color: '#1B1C1E',
 		fontFamily: 'Graphik-Regular',

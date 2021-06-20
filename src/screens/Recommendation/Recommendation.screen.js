@@ -3,6 +3,7 @@ import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { appFormsAPI } from "../../api/api";
 import SyncStorage from 'sync-storage';
 import { SvgUri } from 'react-native-svg';
+
 //styles
 import styles from './Recommendation.styles';
 
@@ -10,65 +11,70 @@ import styles from './Recommendation.styles';
 import CardRecommendation from '../../components/CardRecommendation/CardRecommendation.component';
 import BottomSheetContainer from '../../components/BottomSheetContainer/BottomSheetContainer.component';
 import CardVitamin from '../../components/CardVitamin/CardVitamin.component';
-import Header from '../../components/Header/Header.component';
 import InfoCard from '../../components/InfoCard/InfoCard.component';
+import ButtonNext from '../../components/ButtonNext/ButtonNext.component';
 
 //nav
 import { useNavigation } from '@react-navigation/native';
-import ButtonNext from '../../components/ButtonNext/ButtonNext.component';
 
 const Recommendation = () => {
 	const navigation = useNavigation();
 	const [recommendations, setRecommendations] = useState([])
-    const [fetchRecommendation, setFetchRecommendation] = useState(true)
-    const [products, setProducts] = useState([])
+	const [fetchRecommendation, setFetchRecommendation] = useState(true)
+	const [products, setProducts] = useState([])
 	const [analyses, setAnalyses] = useState([])
-    const [labels, setLabels] = useState([])
-    const [showMoreInfo, setShowMoreInfo] = useState(false)
-    const [moreInfo, setMoreInfo] = useState("")
-    const [actionsForItem, setActionsForItem] = useState(null)
-    const [basket, setBasket] = useState([])
-    const [phone, setPhone] = useState('');
-    const [redirect, setRedirect] = useState(false);
-    const [UUID, setUUID] = useState('');
+	const [labels, setLabels] = useState([])
+	const [showMoreInfo, setShowMoreInfo] = useState(false)
+	const [moreInfo, setMoreInfo] = useState("")
+	const [actionsForItem, setActionsForItem] = useState(null)
+	const [basket, setBasket] = useState([])
+	const [phone, setPhone] = useState('');
+	const [redirect, setRedirect] = useState(false);
+	const [UUID, setUUID] = useState('');
 	const sheetRef = React.useRef();
 	const [actions, setActions] = useState([]);
-	SyncStorage.set('tokenRecommendations','a8ae3faa-22c0-4d1f-bb1e-2cc11c895492')
 	const tokenRecommendations = SyncStorage.get('tokenRecommendations');
+	const [surveyNull, setSurveyNull] = useState(true)
 	useEffect(() => {
 		console.log(tokenRecommendations)
-        appFormsAPI.getDataRecommendationsDetailed(tokenRecommendations)
-            .then(response => {
-                // let tempBasket = [...response.data]
-                // if (localStorage.getItem("basket") && response.data.optional_positions.length !== 0){
-                //     let localBasket = JSON.parse(localStorage.getItem("basket"));
-                //     localBasket.forEach(product => {
-                //         response.data.optional_positions.forEach(recProduct => {
-                //             if(recProduct.product.id === product.id){
-                //                 tempBasket.push(recProduct)
-                //             }
-                //         })
-                //     })
-                // }
-                setRecommendations(response.data.optional_positions)
-                setLabels(response.data.labels)
-                setFetchRecommendation(false)
-                setProducts(response.data.main_positions)
+		setFetchRecommendation(true)
+		appFormsAPI.getDataRecommendationsDetailed(tokenRecommendations)
+			.then(response => {
+				// let tempBasket = [...response.data]
+				// if (localStorage.getItem("basket") && response.data.optional_positions.length !== 0){
+				//     let localBasket = JSON.parse(localStorage.getItem("basket"));
+				//     localBasket.forEach(product => {
+				//         response.data.optional_positions.forEach(recProduct => {
+				//             if(recProduct.product.id === product.id){
+				//                 tempBasket.push(recProduct)
+				//             }
+				//         })
+				//     })
+				// }
+				setRecommendations(response.data.optional_positions)
+				setLabels(response.data.labels)
+				setFetchRecommendation(false)
+				setProducts(response.data.main_positions)
 				setAnalyses(response.data.data.recommendated_analyses)
-				
-            }).catch(error => {
-				console.log('error')
-        })
-    }, [])
-	if(!fetchRecommendation){
-		return (
+				setSurveyNull(false)
+			}).catch(error => {
+				setFetchRecommendation(false)
+				setSurveyNull(true)
+			})
+	}, [])
+	if (!fetchRecommendation) {
+		if (surveyNull) {
+			return (
+				<View style={{ flex: 1, backgroundColor: '#fff', paddingHorizontal: 16, justifyContent: 'center' }}>
+					<ButtonNext title='Пожалуйста пройдите анкету' style={{ width: '100%', height: 48 }} onPress={() => { navigation.navigate('tab/stackNavigation') }} />
+				</View>
+			)
+		}
+		else return (
 			<>
 				<ScrollView
 					style={styles.container}
 					showsVerticalScrollIndicator={false}>
-
-					<Header
-						title='Рекомендации' />
 
 					<View style={[styles.content, { marginTop: 0 }]}>
 						<TouchableOpacity
@@ -77,20 +83,21 @@ const Recommendation = () => {
 						<Text style={styles.paragraph}>На основе ваших ответов мы подобрали витамины и полезные добавки, которые помогут вам чувствовать себя лучше</Text>
 
 						<View style={styles.imagesContainer}>
-							{labels.map((label)=>{
-								return(
-								<View style={styles.imageBox}>
+							{labels.map((label) => {
+								return (
+									<View style={styles.imageBox}>
 
-									<SvgUri 
-										uri={label.image.image_url}
-										style={styles.image} />
-									<Text style={styles.imageDescription}>{label.label_text}</Text>
-								</View>
+										<SvgUri
+											uri={label.image.image_url}
+											width={36}
+											height={36} />
+										<Text style={styles.imageDescription}>{label.label_text}</Text>
+									</View>
 								)
 							})}
 						</View>
 
-						<Text style={[styles.recommendation, { marginTop: 32 }]}>Витамины</Text>
+						<Text style={[styles.recommendation, { marginTop: 24 }]}>Витамины</Text>
 						<Text style={styles.recommendationDescription}>Все добавки отлично сочетаются между собой</Text>
 					</View>
 
@@ -99,9 +106,9 @@ const Recommendation = () => {
 						showsHorizontalScrollIndicator={false}
 						style={styles.CardRecommendationContainer}>
 
-						{products.map((product)=>{
-						
-							return(
+						{products.map((product) => {
+
+							return (
 								<CardRecommendation
 									setActions={setActions}
 									product={product}
@@ -110,9 +117,9 @@ const Recommendation = () => {
 										sheetRef.current.open()
 									}}
 								/>
-						)
+							)
 						})}
-						
+
 					</ScrollView>
 
 					<View style={styles.content}>
@@ -124,9 +131,9 @@ const Recommendation = () => {
 						horizontal={true}
 						showsHorizontalScrollIndicator={false}
 						style={styles.CardRecommendationContainer}>
-						{analyses.map((analyse)=>{
-						
-							return(<CardVitamin name={analyse.char_code} text={analyse.product_name}/>)
+						{analyses.map((analyse) => {
+
+							return (<CardVitamin name={analyse.char_code} text={analyse.product_name} />)
 						})}
 					</ScrollView>
 
@@ -152,21 +159,22 @@ const Recommendation = () => {
 					<View style={styles.buttonContainer}>
 						<ButtonNext
 							title='Начать курс'
-							style={{ width: '100%', }} />
+							style={{ width: '100%' }} />
 					</View>
 				</ScrollView>
-				
+
 				{
 					<BottomSheetContainer
-					actions={actions}
-					sheetRef={sheetRef}/>
+						actions={actions}
+						sheetRef={sheetRef} />
 				}
-				
+
 			</>
 		);
 	}
 	else
-		return(<Text>loading</Text>)
+		return (<Text>loading</Text>)
+
 }
 
 export default Recommendation;

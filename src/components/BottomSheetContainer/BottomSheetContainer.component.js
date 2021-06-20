@@ -1,32 +1,29 @@
 import React from 'react';
-//import { Text, View, ScrollView } from 'react-native';
-
-import { Dimensions, StyleSheet, Text, View, ScrollView } from 'react-native';
-import ScrollBottomSheet from 'react-native-scroll-bottom-sheet';
-
-//other deps
-import RBSheet from "react-native-raw-bottom-sheet";
+import { Text, View, ScrollView } from 'react-native';
 
 //styles
 import styles from './BottomSheetContainer.styles';
 
+//other deps
+import RBSheet from "react-native-raw-bottom-sheet";
+
 //components
 import CardAnswer from '../../components/CardAnswer/CardAnswer.component';
 
-const BottomSheetContainer = ({ sheetRef,actions }) => {
+const BottomSheetContainer = ({ sheetRef, actions }) => {
 	console.log(actions)
 	return (
 		<RBSheet
 			animationType='slide'
 			ref={sheetRef}
-			height={560}
+			height={680}
 			openDuration={600}
 			closeDuration={600}
 			closeOnDragDown={true}
 			dragFromTopOnly={true}
 			customStyles={{
 				container: {
-					backgroundColor: "#E3E3E3",
+					backgroundColor: "#fff",
 					borderTopLeftRadius: 10,
 					borderTopRightRadius: 10,
 					borderColor: '#E3E3E3',
@@ -36,7 +33,7 @@ const BottomSheetContainer = ({ sheetRef,actions }) => {
 				},
 
 				draggableIcon: {
-					backgroundColor: "#fff"
+					backgroundColor: "#E3E3E3"
 				}
 			}}
 		>
@@ -44,14 +41,17 @@ const BottomSheetContainer = ({ sheetRef,actions }) => {
 				disableScrollViewPanResponder={true}
 				showsVerticalScrollIndicator={false}
 				style={{ paddingHorizontal: 16 }}>
-				{actions.map((action)=>{
-					return(
-						<CardAnswer
-					title={action.title}
-					descripton={action.text} />
+				<Text style={styles.title}>Почему витамины этой группы?</Text>
+				{actions.map((action) => {
+					return (
+						<>
+							<CardAnswer
+								title={action.title}
+								descripton={action.text} />
+						</>
 					)
 				})}
-				
+
 			</ScrollView>
 		</RBSheet>
 	);

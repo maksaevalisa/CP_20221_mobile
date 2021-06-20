@@ -18,7 +18,6 @@ import CheckBoxComponent from '../../components/CheckBox/CheckBox.component';
 
 //nav
 import { useNavigation } from '@react-navigation/native';
-import { StackActions } from '@react-navigation/native';
 
 const Form = () => {
 	const navigation = useNavigation();
@@ -32,8 +31,6 @@ const Form = () => {
 	const [tokenRecommendation, setTokenRecommendation] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [sobralos, setSobralos] = useState(false)
-	// const refBack = useRef(null)
-	//const { idSurvey, otherParam } = route.params;
 
 	const idSession = SyncStorage.get('sessionIdSurvey');
 
@@ -50,37 +47,38 @@ const Form = () => {
 						SyncStorage.set('tokenRecommendations', resa.data.detailed_recommendation_uuid)
 
 						setRedirectRecommendation(true)
-					}).catch()
+					}).catch(er => {
+						console.log('Error getToken')
+					})
 			}
 		}, 1200)
 
 		if (redirectRecommendation) {
-			//navigation.dispatch(StackActions.popToTop());
-			navigation.navigate('tab/recommendation')
-			//setLoading(false)
+			navigation.reset({
+				index: 0,
+				routes: [{ name: 'tab/recommendation' }]
+			})
 			setSobralos(true)
 		}
 		if (!sobralos) {
 			return (
 				<View style={styles.collectOrder}>
-					<Text>Собираем ваш набор</Text>
+					<Text style={styles.loadingText}>Собираем ваш набор</Text>
 					<View style={styles.loading}>
 					</View>
-					<View style={styles.loadText}><Text>Подбираем витамины</Text></View>
+					<View style={styles.loadText}><Text style={styles.loadingText}>Подбираем витамины</Text></View>
 				</View>
 			)
 		} else {
 			return (
 				<View style={styles.collectOrder}>
-					<Text>Вы уже собрали пакет</Text>
-					<View style={styles.loading}>
-					</View>
-					<View style={styles.loadText}><Text>Если хотите собрать новый набор</Text></View>
+					<Text style={styles.loadingText}>Вы уже собрали пакет</Text>
+
+					<View style={styles.loadText}><Text style={styles.loadingText}>Если хотите собрать новый набор</Text></View>
 					<TouchableOpacity
 						style={styles.wrapp}
 						activeOpacity={0.8}
 						onPress={() => {
-							console.log()
 							navigation.reset({
 								index: 0,
 								routes: [{ name: 'surveysMiddleware' }]
@@ -92,7 +90,6 @@ const Form = () => {
 				</View>
 			)
 		}
-
 	}
 
 	useEffect(() => {
@@ -102,7 +99,6 @@ const Form = () => {
 			setIdSession(SyncStorage.get('sessionIdSurvey'))
 			setRedirectSurvey(true)
 		}
-
 	}, [])
 
 	useEffect(() => {
@@ -110,7 +106,6 @@ const Form = () => {
 		console.log("IdSESS" + idSession)
 		surveyAPI.getCurrentPage(idSession)
 			.then(response => {
-				console.log(response.data)
 				if (!response.data.is_null) {
 					let tempData = { ...response.data.page.attributes }
 					tempData.answers.forEach((answer, index) => {
@@ -127,7 +122,6 @@ const Form = () => {
 					setLoading(true)
 				setFetch(false)
 			}).catch(error => {
-				// alert('Такой страницы не существует')
 				setFetch(false)
 			})
 	}, [idSession])
@@ -163,10 +157,7 @@ const Form = () => {
 				} else
 					setLoading(true)
 				setFetch(false)
-				/*setAnswers(response.data.answers)
-				console.log(response.data)*/
 			}).catch(error => {
-				// alert('Такой страницы не существует')
 				setFetch(false)
 			})
 	}
@@ -199,7 +190,6 @@ const Form = () => {
 				setData(tempData)
 				setFetch(false)
 			}).catch(error => {
-				// alert('Такой страницы не существует')
 				setFetch(false)
 			})
 	}
@@ -217,7 +207,8 @@ const Form = () => {
 						<>
 							<ScrollView style={styles.content}
 								showsVerticalScrollIndicator={false}>
-								{data.type !== 'PROLOGUE' && <Text style={styles.textSteps}>Шаг {data.current_step} из {data.steps_count}</Text>}
+								{data.type !== 'PROLOGUE' &&
+									<Text style={styles.textSteps}>Шаг {data.current_step} из {data.steps_count}</Text>}
 
 								{((data.title !== 'empty' && data.title !== '') && data.type !== 'PROLOGUE') &&
 									<Text style={styles.question}>{data.title}</Text>}
@@ -228,7 +219,6 @@ const Form = () => {
 								{data.type === 'PROLOGUE' &&
 									<OnBoard
 										image={data.image}
-										image_url={require(`../../assets/images/OnBoard.png`)}
 										title={data.title}
 										setDisabledButton={setDisabledButton}
 										description={data.description} />}

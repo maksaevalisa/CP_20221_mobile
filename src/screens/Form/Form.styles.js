@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#fff',
 		paddingHorizontal: 16,
-		//paddingTop: 16,
+		paddingTop: 44
 	},
 	content: {
 		marginBottom: 72,
@@ -30,12 +30,11 @@ const styles = StyleSheet.create({
 		fontFamily: 'Graphik-Medium',
 	},
 	paragraph: {
+		marginTop: 16,
 		fontSize: 18,
 		color: '#1B1C1E',
 		fontFamily: 'Graphik-Regular',
 		lineHeight: 25.2,
-		//marginTop: 16,
-		//marginBottom: 24
 	},
 	buttonContainer: {
 		flexDirection: 'row',
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 18,
-		color: '#FFFFFF',
+		color: '#7F8081',
 		fontFamily: 'Graphik-Medium',
 	}
 });

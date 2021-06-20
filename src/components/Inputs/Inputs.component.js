@@ -5,12 +5,6 @@ import { Text, TextInput, View } from 'react-native';
 import styles from './Inputs.styles';
 
 const Inputs = (props) => {
-	// focusedInput = () => {
-	// 	this.textInput.setNativeProps({
-	// 		style: { borderColor: '#4D4DFF', borderWidth: 1 }
-	// 	})
-	// }
-
 	useEffect(() => {
 		props.setDisabledButton(true)
 		props.data.answers.forEach((item) => {
@@ -49,7 +43,6 @@ const Inputs = (props) => {
 								<View>
 									<TextInput
 										style={styles.input}
-										//autoFocus
 										onChange={(e) => {
 											let tempData = { ...props.data }
 											tempData.answers[index].value = e.nativeEvent.text
@@ -58,8 +51,6 @@ const Inputs = (props) => {
 										}}
 										value={inp.value}
 										id={inp.id}
-									// ref={c => {textInput = c }}
-									// onFocus={focusedInput}
 									/>
 								</View>
 							</View>
@@ -78,7 +69,6 @@ const Inputs = (props) => {
 									<TextInput
 										keyboardType='number-pad'
 										style={styles.input}
-										//autoFocus
 										onChange={(e) => {
 											let tempData = { ...props.data }
 											tempData.answers[index].value = e.nativeEvent.text
@@ -87,8 +77,6 @@ const Inputs = (props) => {
 										}}
 										value={inp.value}
 										id={inp.id}
-									// ref={c => {textInput = c }}
-									// onFocus={focusedInput}
 									/>
 								</View>
 							</View>

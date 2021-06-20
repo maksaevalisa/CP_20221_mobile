@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		padding: 16,
 		borderColor: '#7F8081',
-		borderWidth: 0.5,
+		borderWidth: 0.3,
 	},
 	vitaminContainer: {
 		flexDirection: 'row',
@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	vitaminNameText: {
-		fontSize: 24,
+		fontSize: 40,
 		color: '#1B1C1E',
+		fontFamily: 'Graphik-Medium',
 		lineHeight: 56,
 	},
 	vitaminTextContainer: {

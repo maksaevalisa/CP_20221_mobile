@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#fff',
-		paddingBottom: 24
+		paddingTop: 44
 	},
 	content: {
 		width: '100%',
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 		marginTop: 32,
 	},
 	paragraph: {
-		width: '90%',
+		width: '95%',
 		fontSize: 16,
 		color: '#1B1C1E',
 		fontFamily: 'Graphik-Regular',
@@ -29,11 +29,6 @@ const styles = StyleSheet.create({
 		height: 72,
 		alignItems: 'center',
 	},
-	image: {
-		width: 42,
-		height: 42,
-		marginBottom: 6
-	},
 	imageDescription: {
 		fontSize: 14,
 		color: '#3F3F3F',
@@ -47,6 +42,7 @@ const styles = StyleSheet.create({
 		lineHeight: 30.8,
 	},
 	recommendationDescription: {
+		width: '95%',
 		fontSize: 14,
 		color: '#7F8081',
 		fontFamily: 'Graphik-Regular',
@@ -60,7 +56,7 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		paddingHorizontal: 16,
 		marginTop: 24,
-		marginBottom: 24,
+		marginBottom: 64,
 	}
 });
 

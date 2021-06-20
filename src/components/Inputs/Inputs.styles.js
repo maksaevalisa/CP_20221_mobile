@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
 		color: '#1B1C1E',
 		fontFamily: 'Graphik-Regular',
 		lineHeight: 25.2,
-		//marginTop: 16,
 	},
 	input: {
 		width: '100%',
@@ -26,7 +25,6 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontFamily: 'Graphik-Regular',
 		lineHeight: 22,
-		//marginTop: 24,
 	},
 });
 

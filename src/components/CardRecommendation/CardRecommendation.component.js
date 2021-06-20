@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity,ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 
 //styles
 import styles from './CardRecommendation.styles';
@@ -11,19 +11,17 @@ const Tabs = ({ title, onPress }) => {
 	return (
 		<TouchableOpacity style={styles.tab} onPress={onPress}>
 			<Text style={styles.tabText}>{title}</Text>
-			<TouchableOpacity style={styles.rowBox} activeOpacity={0.8} onPress={onPress}>
+			<View style={styles.rowBox} activeOpacity={0.8} onPress={onPress}>
 				<RowRight name="right" size={16} color="#fff" />
-			</TouchableOpacity>
+			</View>
 		</TouchableOpacity>
 	)
 }
 
-const CardRecommendation = ({ onPress,product }) => {
-
+const CardRecommendation = ({ onPress, product }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.vitaminContainer}>
-
 				<View style={styles.vitaminNameContainer}>
 					<Text style={styles.vitaminNameText}>{product.product.product_charcode}</Text>
 				</View>
@@ -35,16 +33,13 @@ const CardRecommendation = ({ onPress,product }) => {
 			</View>
 
 			<ScrollView style={styles.tabsContainer}>
-				
-				{product.actions.map((action)=>{
-					
-					return(
+				{product.actions.map((action) => {
+					return (
 						<Tabs
-						title={action.title}
-						onPress={onPress} />
+							title={action.title}
+							onPress={onPress} />
 					)
 				})}
-			
 			</ScrollView>
 
 			<TouchableOpacity
@@ -53,7 +48,7 @@ const CardRecommendation = ({ onPress,product }) => {
 				onPress={onPress}>
 
 				<Text style={styles.moreDetailsText} >Подробнее</Text>
-				<RowRight name="right" size={12} color="#7F8081" style={{ marginTop: 4 }} />
+				<RowRight name="right" size={12} color="#7F8081" style={{ marginTop: 5 }} />
 			</TouchableOpacity>
 		</View>
 	);

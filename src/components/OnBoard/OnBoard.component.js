@@ -1,14 +1,19 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
+import { SvgUri } from 'react-native-svg';
 
 //styles
 import styles from './OnBoard.styles';
 
-const onBoard = ({ image, image_url, title, description, setDisabledButton }) => {
+const onBoard = ({ image, title, description, setDisabledButton }) => {
 	setDisabledButton(false)
 	return (
 		<View style={styles.container}>
-			{image !== null && <Image source={image_url} style={styles.image} alt='' />}
+			{image !== null &&
+				<SvgUri
+					uri={image.image_url}
+					width={96}
+					height={96} />}
 
 			<Text style={styles.question}>{title}</Text>
 

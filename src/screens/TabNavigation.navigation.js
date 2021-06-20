@@ -4,7 +4,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //screens
-import { Recommendation, WhyScreen } from '../screens';
+import { Recommendation, WhyScreen, BlockScreen } from '../screens';
 import StackNavigation from './StackNavigation.navigation';
 
 //other deps
@@ -24,14 +24,17 @@ const TabNavigation = () => {
 				activeBackgroundColor: '#fff',
 				inactiveTintColor: '#000',
 				activeTintColor: '#4D4DFF',
-				showLabel: false
+				labelStyle: {
+					fontSize: 14,
+					fontFamily: 'Graphik-Regular',
+				}
 			}}>
 
 			<Tab.Screen
 				name='tab/stackNavigation'
 				component={StackNavigation}
 				options={{
-					tabBarLabel: 'To do',
+					tabBarLabel: 'Анкета',
 					tabBarIcon: getTabBarIcon('ios-document-text-outline'),
 				}}
 			/>
@@ -40,15 +43,15 @@ const TabNavigation = () => {
 				name='tab/recommendation'
 				component={Recommendation}
 				options={{
-					tabBarLabel: 'To do',
+					tabBarLabel: 'Рекомендации',
 					tabBarIcon: getTabBarIcon('ios-receipt-outline'),
 				}} />
 
 			<Tab.Screen
-				name='tab/whyScreen'
-				component={WhyScreen}
+				name='tab/blockScreen'
+				component={BlockScreen}
 				options={{
-					tabBarLabel: 'To do',
+					tabBarLabel: 'Блог',
 					tabBarIcon: getTabBarIcon('newspaper-outline'),
 				}} />
 

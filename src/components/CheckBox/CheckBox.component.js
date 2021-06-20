@@ -60,6 +60,10 @@ const CheckBoxComponent = (props) => {
 							}}>
 								<CheckBox
 									value={selected.indexOf(cb.id) !== -1}
+									tintColors={{
+										true: '#4D4DFF',
+										false: '#7F8081'
+									}}
 									onChange={() => {
 										console.log('press')
 										onChangeCheckBox(cb.id)

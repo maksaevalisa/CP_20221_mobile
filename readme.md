@@ -5,4 +5,4 @@
 2. Показывать рекомендованные витамины и анализы
 3. Показывает блог
 
-Ссылка на приложение:
+Ссылка на приложение (APK): https://drive.google.com/file/d/1S7oVS6C_6nWEVRs73Ha_kOvX23nfTePU/view?usp=sharing
